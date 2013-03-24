@@ -2,6 +2,8 @@ package org.ceh.domain;
 
 import java.io.Serializable;
 
+import org.apache.commons.lang3.builder.EqualsBuilder;
+import org.apache.commons.lang3.builder.HashCodeBuilder;
 import org.apache.commons.lang3.builder.ToStringBuilder;
 
 public class Province implements Serializable {
@@ -42,5 +44,20 @@ public class Province implements Serializable {
 	public String toString() {
 		return new ToStringBuilder(this).append("id", id).append("name", name)
 				.toString();
+	}
+
+	@Override
+	public boolean equals(Object o) {
+		if (o instanceof Province) {
+			Province other = (Province) o;
+			return new EqualsBuilder().append(id, other.id)
+					.append(name, other.name).isEquals();
+		}
+		return false;
+	}
+
+	@Override
+	public int hashCode() {
+		return new HashCodeBuilder().append(id).append(name).toHashCode();
 	}
 }
