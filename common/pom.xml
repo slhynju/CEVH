@@ -2,17 +2,30 @@
 	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
 	<modelVersion>4.0.0</modelVersion>
 
-	<groupId>org.ceh</groupId>
-	<artifactId>common</artifactId>
+	<groupId>org.cevh</groupId>
+	<artifactId>cevh-common</artifactId>
 	<version>0.1-SNAPSHOT</version>
 	<packaging>jar</packaging>
 
-	<name>ceh-common</name>
-	<url>http://maven.apache.org</url>
+    <dependencies>
+        <!-- runtime dependencies -->
+        <dependency>
+            <groupId>org.jewel</groupId>
+            <artifactId>jewel-util</artifactId>
+            <version>0.1-SNAPSHOT</version>
+        </dependency>
+        <!-- test dependencies -->
+        <dependency>
+            <groupId>junit</groupId>
+            <artifactId>junit</artifactId>
+            <version>4.10</version>
+            <scope>test</scope>
+        </dependency>
+    </dependencies>
 
-	<properties>
-		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
-	</properties>
+    <properties>
+        <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+    </properties>
 
 	<build>
 		<plugins>
@@ -28,19 +41,4 @@
 		</plugins>
 	</build>
 
-	<dependencies>
-		<!-- runtime dependencies -->
-		<dependency>
-			<groupId>org.apache.commons</groupId>
-			<artifactId>commons-lang3</artifactId>
-			<version>3.1</version>
-		</dependency>
-		<!-- test dependencies -->
-		<dependency>
-			<groupId>junit</groupId>
-			<artifactId>junit</artifactId>
-			<version>4.10</version>
-			<scope>test</scope>
-		</dependency>
-	</dependencies>
 </project>

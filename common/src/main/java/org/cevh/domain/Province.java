@@ -1,10 +1,10 @@
-package org.ceh.domain;
+package org.cevh.domain;
 
 import java.io.Serializable;
 
-import org.apache.commons.lang3.builder.EqualsBuilder;
-import org.apache.commons.lang3.builder.HashCodeBuilder;
-import org.apache.commons.lang3.builder.ToStringBuilder;
+import org.jewel.util.BeanStringBuilder;
+import org.jewel.util.EqualsUtil;
+import org.jewel.util.HashCodeBuilder;
 
 public class Province implements Serializable {
 
@@ -15,8 +15,7 @@ public class Province implements Serializable {
 	private String name;
 
 	public Province() {
-		id = 0;
-		name = "";
+		this(0, "");
 	}
 
 	public Province(int id, String name) {
@@ -42,22 +41,22 @@ public class Province implements Serializable {
 
 	@Override
 	public String toString() {
-		return new ToStringBuilder(this).append("id", id).append("name", name)
-				.toString();
+		return new BeanStringBuilder(Province.class).append("id", id)
+				.append("name", name).toS();
 	}
 
 	@Override
 	public boolean equals(Object o) {
 		if (o instanceof Province) {
 			Province other = (Province) o;
-			return new EqualsBuilder().append(id, other.id)
-					.append(name, other.name).isEquals();
+			return EqualsUtil.isEquals(id, other.id)
+					&& EqualsUtil.isEquals(name, other.name);
 		}
 		return false;
 	}
 
 	@Override
 	public int hashCode() {
-		return new HashCodeBuilder().append(id).append(name).toHashCode();
+		return new HashCodeBuilder().append(id).append(name).toValue();
 	}
 }

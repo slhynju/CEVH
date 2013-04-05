@@ -1,10 +1,12 @@
-package org.ceh.ck2;
+package org.cevh.ck2;
 
 import java.nio.file.Path;
 import java.util.List;
 
-import org.ceh.domain.Province;
+import org.cevh.domain.Province;
 
 public interface ProvinceLoader {
+
 	public List<Province> load(Path gameRoot);
+
 }

@@ -1,4 +1,4 @@
-CEH
+CEVH
 ===
 
-Game save converter for CK, EU and HOI series
+Game save converter for CK, EU, VIC and HOI series
