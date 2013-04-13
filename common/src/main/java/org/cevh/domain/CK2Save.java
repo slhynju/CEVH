@@ -1,6 +1,7 @@
 package org.cevh.domain;
 
 import java.io.Serializable;
+import java.util.Date;
 
 import org.jewel.util.BeanStringBuilder;
 import org.jewel.util.EqualsUtil;
@@ -12,16 +13,16 @@ public class CK2Save implements Serializable {
 
 	private String fileName;
 
-	private String version;
+	private String gameVersion;
 
-	private String date;
+	private Date gameDate;
 
 	private String playerCharacterId;
 
 	public CK2Save() {
 		fileName = "";
-		version = "";
-		date = "";
+		gameVersion = "";
+		gameDate = null;
 		playerCharacterId = "";
 	}
 
@@ -33,20 +34,20 @@ public class CK2Save implements Serializable {
 		this.fileName = fileName;
 	}
 
-	public String getVersion() {
-		return version;
+	public String getGameVersion() {
+		return gameVersion;
 	}
 
-	public void setVersion(String version) {
-		this.version = version;
+	public void setGameVersion(String version) {
+		this.gameVersion = version;
 	}
 
-	public String getDate() {
-		return date;
+	public Date getGameDate() {
+		return gameDate;
 	}
 
-	public void setDate(String date) {
-		this.date = date;
+	public void setGameDate(Date gameDate) {
+		this.gameDate = gameDate;
 	}
 
 	public String getPlayerCharacterId() {
@@ -60,8 +61,8 @@ public class CK2Save implements Serializable {
 	@Override
 	public String toString() {
 		return new BeanStringBuilder(CK2Save.class)
-				.append("fileName", fileName).append("version", version)
-				.append("date", date)
+				.append("fileName", fileName).append("version", gameVersion)
+				.append("date", gameDate)
 				.append("playerCharacterId", playerCharacterId).toS();
 
 	}
@@ -71,8 +72,8 @@ public class CK2Save implements Serializable {
 		if (o instanceof CK2Save) {
 			CK2Save other = (CK2Save) o;
 			return EqualsUtil.isEquals(fileName, other.fileName)
-					&& EqualsUtil.isEquals(version, other.version)
-					&& EqualsUtil.isEquals(date, other.date)
+					&& EqualsUtil.isEquals(gameVersion, other.gameVersion)
+					&& EqualsUtil.isEquals(gameDate, other.gameDate)
 					&& EqualsUtil.isEquals(playerCharacterId,
 							other.playerCharacterId);
 		}
@@ -81,7 +82,7 @@ public class CK2Save implements Serializable {
 
 	@Override
 	public int hashCode() {
-		return new HashCodeBuilder().append(fileName).append(version)
-				.append(date).append(playerCharacterId).toValue();
+		return new HashCodeBuilder().append(fileName).append(gameVersion)
+				.append(gameDate).append(playerCharacterId).toValue();
 	}
 }

@@ -1,13 +1,20 @@
 package org.cevh.util;
 
 import java.nio.file.Path;
-import java.util.List;
-
-import org.jewel.util.collection.KeyValue;
 
 public interface SaveLoader {
 
-	public List<KeyValue<String, Object>> load(Path path);
+	public static final String ANONYMOUS_KEY = "#";
+	
+	public static final String DATE_FORMAT = "yyyy.M.d";
 
-	public void markProperty(String... properties);
+	public void load(Path path);
+
+	public void addKeyValueListener(KeyValueListener listener);
+
+	public void addBlockListener(BlockListener listener);
+	
+	public void addArrayListener(ArrayListener listener);
+	
+	public void clearListeners();
 }
