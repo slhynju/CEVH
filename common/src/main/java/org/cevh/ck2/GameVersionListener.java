@@ -11,7 +11,8 @@ public class GameVersionListener extends KeyValueListenerSupport<CK2Save> {
 	}
 
 	@Override
-	public void onKeyValue(String localKey, String fullKey, String valueStr) {
+	public void onKeyValue(String localKey, String fullKey, int fullKeySize,
+			String valueStr) {
 		if ("version".equals(fullKey)) {
 			String version = StringUtil.unwrap(valueStr, 1);
 			save.setGameVersion(version);

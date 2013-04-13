@@ -28,6 +28,13 @@ public class CK2SaveLoaderImpl implements CK2SaveLoader {
 		loader.addKeyValueListener(new GameVersionListener(save));
 		loader.addKeyValueListener(new GameDateListener(save));
 		loader.addKeyValueListener(new PlayerCharacterListener(save));
+		loader.addKeyValueListener(new FlagListener(save));
+		DynastyListener dynastyListener = new DynastyListener(save);
+		loader.addKeyValueListener(dynastyListener);
+		loader.addBlockListener(dynastyListener);
+		CharacterListener characterListener = new CharacterListener(save);
+		loader.addKeyValueListener(characterListener);
+		loader.addBlockListener(characterListener);
 		// TODO add more listeners
 	}
 

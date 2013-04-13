@@ -8,14 +8,17 @@ public class BlockListenerMatcher implements Matcher<BlockListener> {
 
 	private final String fullKey;
 
-	public BlockListenerMatcher(String localKey, String fullKey) {
+	private final int fullKeySize;
+
+	public BlockListenerMatcher(String localKey, String fullKey, int fullKeySize) {
 		this.localKey = localKey;
 		this.fullKey = fullKey;
+		this.fullKeySize = fullKeySize;
 	}
 
 	@Override
 	public boolean matches(BlockListener listener) {
-		return listener.onBlockStart(localKey, fullKey);
+		return listener.onBlockStart(localKey, fullKey, fullKeySize);
 	}
 
 }

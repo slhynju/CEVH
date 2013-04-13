@@ -15,7 +15,8 @@ public class GameDateListener extends KeyValueListenerSupport<CK2Save> {
 	}
 
 	@Override
-	public void onKeyValue(String localKey, String fullKey, String valueStr) {
+	public void onKeyValue(String localKey, String fullKey, int fullKeySize,
+			String valueStr) {
 		if ("date".equals(fullKey)) {
 			String unquoted = StringUtil.unwrap(valueStr, 1);
 			Date gameDate = DateUtil.parse(unquoted, SaveLoader.DATE_FORMAT);

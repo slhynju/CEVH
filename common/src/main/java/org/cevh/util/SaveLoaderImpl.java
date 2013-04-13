@@ -20,7 +20,6 @@ import org.slf4j.LoggerFactory;
 
 public class SaveLoaderImpl implements SaveLoader {
 
-	@SuppressWarnings("unused")
 	private final Logger log;
 
 	private final List<KeyValueListener> kvListeners;
@@ -59,7 +58,7 @@ public class SaveLoaderImpl implements SaveLoader {
 	public void addArrayListener(ArrayListener listener) {
 		arrayListeners.add(listener);
 	}
-	
+
 	@Override
 	public void clearListeners() {
 		kvListeners.clear();
@@ -69,6 +68,10 @@ public class SaveLoaderImpl implements SaveLoader {
 
 	@Override
 	public void load(Path path) {
+		long startTime = System.currentTimeMillis();
+		if (log.isInfoEnabled()) {
+			log.info("Loading save file {} ...", path.toString());
+		}
 		init();
 		try (BufferedReader reader = PathUtil.readTextFile(path,
 				StandardCharsets.ISO_8859_1)) {
@@ -82,6 +85,11 @@ public class SaveLoaderImpl implements SaveLoader {
 					"IOException when reading file ");
 			sb.append(path).append('.');
 			throw new CevhException(sb, e);
+		}
+		if (log.isInfoEnabled()) {
+			long endTime = System.currentTimeMillis();
+			log.info("File {} is loaded in {} ms.", path.toString(), endTime
+					- startTime);
 		}
 	}
 
@@ -141,7 +149,8 @@ public class SaveLoaderImpl implements SaveLoader {
 		String valueStr = pair[1];
 		String fullKey = buildFullKey(localKey);
 		for (KeyValueListener listener : kvListeners) {
-			listener.onKeyValue(localKey, fullKey, valueStr);
+			listener.onKeyValue(localKey, fullKey, keyStack.size() + 1,
+					valueStr);
 		}
 	}
 
@@ -172,8 +181,9 @@ public class SaveLoaderImpl implements SaveLoader {
 		}
 		String localKey = keyStack.peek();
 		String fullKey = buildFullKey();
+		int fullKeySize = keyStack.size();
 		BlockListenerMatcher matcher = new BlockListenerMatcher(localKey,
-				fullKey);
+				fullKey, fullKeySize);
 		List<BlockListener> interestListeners = CollectionUtil.sub(
 				blockListeners, matcher);
 		blockListenerStack.push(interestListeners);
@@ -195,10 +205,11 @@ public class SaveLoaderImpl implements SaveLoader {
 			return;
 		}
 		String fullKey = buildFullKey();
+		int fullKeySize = keyStack.size();
 		String localKey = keyStack.pop();
 		List<BlockListener> interestListeners = blockListenerStack.pop();
 		for (BlockListener listener : interestListeners) {
-			listener.onBlockEnd(localKey, fullKey);
+			listener.onBlockEnd(localKey, fullKey, fullKeySize);
 		}
 	}
 
