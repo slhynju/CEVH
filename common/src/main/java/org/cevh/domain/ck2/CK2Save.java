@@ -33,6 +33,8 @@ public class CK2Save implements Serializable {
 
 	private Map<String, CK2Province> provincesByCapitalBaronTitle;
 
+	private Map<String, CK2Title> titles;
+
 	public CK2Save() {
 		fileName = "";
 		gameVersion = "";
@@ -44,6 +46,7 @@ public class CK2Save implements Serializable {
 		provinces = new HashMap<>(1000);
 		provincesByCountTitle = new HashMap<>(1000);
 		provincesByCapitalBaronTitle = new HashMap<>(1000);
+		titles = new HashMap<>(1000);
 	}
 
 	public String getFileName() {
@@ -121,6 +124,14 @@ public class CK2Save implements Serializable {
 				province);
 	}
 
+	public Map<String, CK2Title> getTitles() {
+		return titles;
+	}
+
+	public void addTitle(CK2Title title) {
+		titles.put(title.getId(), title);
+	}
+
 	@Override
 	public String toString() {
 		return new BeanStringBuilder(CK2Save.class)
@@ -130,7 +141,8 @@ public class CK2Save implements Serializable {
 				.append("playerCharacterId", playerCharacterId)
 				.append("flags", flags).append("dynastySize", dynasties.size())
 				.append("lordSize", lords.size())
-				.append("provinceSize", provinces.size()).toS();
+				.append("provinceSize", provinces.size())
+				.append("titlesSize", titles.size()).toS();
 	}
 
 	@Override

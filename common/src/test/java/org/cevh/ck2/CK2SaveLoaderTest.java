@@ -12,6 +12,7 @@ import org.cevh.domain.ck2.CK2Character;
 import org.cevh.domain.ck2.CK2Dynasty;
 import org.cevh.domain.ck2.CK2Province;
 import org.cevh.domain.ck2.CK2Save;
+import org.cevh.domain.ck2.CK2Title;
 import org.jewel.util.EqualsUtil;
 import org.jewel.util.date.DateUtil;
 import org.jewel.util.io.PathUtil;
@@ -64,6 +65,12 @@ public class CK2SaveLoaderTest {
 		assertEquals("c_vestisland", province.getCountTitleId());
 		assertEquals(2, province.getBaronTitleIds().size());
 		assertEquals("b_reykjavik", province.getCapitalBaronTitleId());
+		Map<String, CK2Title> titles = save.getTitles();
+		assertEquals(4215, titles.size());
+		CK2Title title = titles.get("d_lancaster");
+		assertEquals("k_england", title.getLiegeTitleId());
+		assertEquals("5644", title.getHolderId());
+		assertEquals("k_england", title.getDeJureLiegeTitleId());
 	}
 
 }

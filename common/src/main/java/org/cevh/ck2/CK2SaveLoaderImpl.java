@@ -38,6 +38,9 @@ public class CK2SaveLoaderImpl implements CK2SaveLoader {
 		ProvinceListener provinceListener = new ProvinceListener(save);
 		loader.addKeyValueListener(provinceListener);
 		loader.addBlockListener(provinceListener);
+		TitleListener titleListener = new TitleListener(save);
+		loader.addKeyValueListener(titleListener);
+		loader.addBlockListener(titleListener);
 		// TODO add more listeners
 	}
 
