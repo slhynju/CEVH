@@ -1,4 +1,4 @@
-package org.cevh.domain;
+package org.cevh.domain.ck2;
 
 import java.io.Serializable;
 

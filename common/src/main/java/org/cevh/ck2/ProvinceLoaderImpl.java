@@ -6,9 +6,8 @@ import java.util.ArrayList;
 import java.util.List;
 
 import org.cevh.CevhException;
-import org.cevh.domain.Province;
+import org.cevh.domain.ck2.CK2Province;
 import org.jewel.JewelException;
-import org.jewel.util.NumberUtil;
 import org.jewel.util.StringUtil;
 import org.jewel.util.io.PathUtil;
 import org.slf4j.Logger;
@@ -23,11 +22,11 @@ public class ProvinceLoaderImpl implements ProvinceLoader {
 	}
 
 	@Override
-	public List<Province> load(Path gameRoot) {
+	public List<CK2Province> load(Path gameRoot) {
 		List<Path> paths = listProvinceFiles(gameRoot);
-		List<Province> provinces = new ArrayList<>(paths.size());
+		List<CK2Province> provinces = new ArrayList<>(paths.size());
 		for (Path path : paths) {
-			Province p = readProvinceFile(path);
+			CK2Province p = readProvinceFile(path);
 			provinces.add(p);
 		}
 		return provinces;
@@ -46,10 +45,9 @@ public class ProvinceLoaderImpl implements ProvinceLoader {
 		}
 	}
 
-	private static Province readProvinceFile(Path path) {
+	private static CK2Province readProvinceFile(Path path) {
 		String fileName = path.getFileName().toString();
 		String[] tokens = StringUtil.splitTokens(fileName, "-", ".");
-		int id = NumberUtil.toInt(tokens[0], 0);
-		return new Province(id, tokens[1]);
+		return new CK2Province(tokens[0], tokens[1]);
 	}
 }

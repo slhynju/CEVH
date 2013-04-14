@@ -1,8 +1,8 @@
 package org.cevh.ck2;
 
-import org.cevh.domain.CK2Character;
-import org.cevh.domain.CK2Save;
-import org.cevh.domain.Gender;
+import org.cevh.domain.ck2.CK2Character;
+import org.cevh.domain.ck2.CK2Save;
+import org.cevh.domain.ck2.Gender;
 import org.cevh.util.BlockListener;
 import org.cevh.util.KeyValueListenerSupport;
 import org.cevh.util.SaveLoader;
@@ -72,9 +72,8 @@ public class CharacterListener extends KeyValueListenerSupport<CK2Save>
 		if (fullKeySize != 2) {
 			return false;
 		}
-		String[] pair = StringUtil.splitPair(fullKey, ".");
 		character = new CK2Character();
-		character.setId(pair[1]);
+		character.setId(localKey);
 		return true;
 	}
 

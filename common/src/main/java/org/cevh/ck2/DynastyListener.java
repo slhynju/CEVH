@@ -1,7 +1,7 @@
 package org.cevh.ck2;
 
-import org.cevh.domain.CK2Dynasty;
-import org.cevh.domain.CK2Save;
+import org.cevh.domain.ck2.CK2Dynasty;
+import org.cevh.domain.ck2.CK2Save;
 import org.cevh.util.BlockListener;
 import org.cevh.util.KeyValueListenerSupport;
 import org.jewel.util.StringUtil;
@@ -43,9 +43,8 @@ public class DynastyListener extends KeyValueListenerSupport<CK2Save> implements
 		if (fullKeySize != 2) {
 			return false;
 		}
-		String[] pair = StringUtil.splitPair(fullKey, ".");
 		dynasty = new CK2Dynasty();
-		dynasty.setId(pair[1]);
+		dynasty.setId(localKey);
 		return true;
 	}
 

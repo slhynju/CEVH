@@ -8,9 +8,10 @@ import java.nio.file.Path;
 import java.util.Date;
 import java.util.Map;
 
-import org.cevh.domain.CK2Character;
-import org.cevh.domain.CK2Dynasty;
-import org.cevh.domain.CK2Save;
+import org.cevh.domain.ck2.CK2Character;
+import org.cevh.domain.ck2.CK2Dynasty;
+import org.cevh.domain.ck2.CK2Province;
+import org.cevh.domain.ck2.CK2Save;
 import org.jewel.util.EqualsUtil;
 import org.jewel.util.date.DateUtil;
 import org.jewel.util.io.PathUtil;
@@ -54,7 +55,15 @@ public class CK2SaveLoaderTest {
 		assertTrue(ch.isMale());
 		assertTrue(ch.isLord());
 		assertTrue(ch.isIndependentLord());
-
+		Map<String, CK2Province> provinces = save.getProvinces();
+		assertEquals(929, provinces.size());
+		CK2Province province = provinces.get("1");
+		assertEquals("Vestisland", province.getName());
+		assertEquals("norwegian", province.getCulture());
+		assertEquals("catholic", province.getReligion());
+		assertEquals("c_vestisland", province.getCountTitleId());
+		assertEquals(2, province.getBaronTitleIds().size());
+		assertEquals("b_reykjavik", province.getCapitalBaronTitleId());
 	}
 
 }

@@ -2,7 +2,7 @@ package org.cevh.ck2;
 
 import java.nio.file.Path;
 
-import org.cevh.domain.CK2Save;
+import org.cevh.domain.ck2.CK2Save;
 
 public interface CK2SaveLoader {
 

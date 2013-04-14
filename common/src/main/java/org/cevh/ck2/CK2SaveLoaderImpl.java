@@ -2,7 +2,7 @@ package org.cevh.ck2;
 
 import java.nio.file.Path;
 
-import org.cevh.domain.CK2Save;
+import org.cevh.domain.ck2.CK2Save;
 import org.cevh.util.SaveLoader;
 import org.cevh.util.SaveLoaderImpl;
 
@@ -35,6 +35,9 @@ public class CK2SaveLoaderImpl implements CK2SaveLoader {
 		CharacterListener characterListener = new CharacterListener(save);
 		loader.addKeyValueListener(characterListener);
 		loader.addBlockListener(characterListener);
+		ProvinceListener provinceListener = new ProvinceListener(save);
+		loader.addKeyValueListener(provinceListener);
+		loader.addBlockListener(provinceListener);
 		// TODO add more listeners
 	}
 

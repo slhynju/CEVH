@@ -2,7 +2,7 @@ package org.cevh.ck2;
 
 import java.util.Date;
 
-import org.cevh.domain.CK2Save;
+import org.cevh.domain.ck2.CK2Save;
 import org.cevh.util.KeyValueListenerSupport;
 import org.cevh.util.SaveLoader;
 import org.jewel.util.StringUtil;

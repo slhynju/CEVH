@@ -1,4 +1,4 @@
-package org.cevh.domain;
+package org.cevh.domain.ck2;
 
 import java.io.Serializable;
 import java.util.Date;
@@ -27,6 +27,12 @@ public class CK2Save implements Serializable {
 
 	private Map<String, CK2Character> lords;
 
+	private Map<String, CK2Province> provinces;
+
+	private Map<String, CK2Province> provincesByCountTitle;
+
+	private Map<String, CK2Province> provincesByCapitalBaronTitle;
+
 	public CK2Save() {
 		fileName = "";
 		gameVersion = "";
@@ -34,7 +40,10 @@ public class CK2Save implements Serializable {
 		playerCharacterId = "";
 		flags = new HashMap<>();
 		dynasties = new HashMap<>(10000);
-		lords = new HashMap<>(1000);
+		lords = new HashMap<>(3000);
+		provinces = new HashMap<>(1000);
+		provincesByCountTitle = new HashMap<>(1000);
+		provincesByCapitalBaronTitle = new HashMap<>(1000);
 	}
 
 	public String getFileName() {
@@ -93,6 +102,25 @@ public class CK2Save implements Serializable {
 		lords.put(lord.getId(), lord);
 	}
 
+	public Map<String, CK2Province> getProvinces() {
+		return provinces;
+	}
+
+	public CK2Province getProvinceByCountTitle(String countTitleId) {
+		return provincesByCountTitle.get(countTitleId);
+	}
+
+	public CK2Province getProvinceByCapitalBaronTitle(String baronTitleId) {
+		return provincesByCapitalBaronTitle.get(baronTitleId);
+	}
+
+	public void addProvince(CK2Province province) {
+		provinces.put(province.getId(), province);
+		provincesByCountTitle.put(province.getCountTitleId(), province);
+		provincesByCapitalBaronTitle.put(province.getCapitalBaronTitleId(),
+				province);
+	}
+
 	@Override
 	public String toString() {
 		return new BeanStringBuilder(CK2Save.class)
@@ -101,8 +129,8 @@ public class CK2Save implements Serializable {
 				.append("gameDate", gameDate)
 				.append("playerCharacterId", playerCharacterId)
 				.append("flags", flags).append("dynastySize", dynasties.size())
-				.append("lordSize", lords.size()).toS();
-
+				.append("lordSize", lords.size())
+				.append("provinceSize", provinces.size()).toS();
 	}
 
 	@Override
